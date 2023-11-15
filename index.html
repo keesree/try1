@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+  
+    <title>Image Upload and Display</title>
+    <link rel="stylesheet" href="index.css">
+    <meta charset="UTF-8">
+   
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest"> </script>
+    <!--<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.10.0"></script> -->
+    
+</head>
+<body>
+    <h1>Upload and Display Image</h1>
+
+
+    <form method="post">
+        <input type="file" id="image-input" accept="image/*" onchange="displayImage(this)">
+   
+        <div id="image-container">
+            <img id="uploaded-image" src="" alt="Uploaded Image">
+        </div>
+
+
+    </form>
+   
+    <p id="demo"></p>
+
+
+    <script src="index.js"></script>
+    <script async>
+     
+      //getting and resizing the image
+     /*   
+        let im = document.getElementById('uploaded-image');
+        im.addEventListener('change', function (e) {
+            if (e.target.files) {
+                let imageFile = e.target.files[0];
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    var img = document.createElement("img");
+                    img.onload = function (event) {
+                        // Dynamically create a canvas element
+                        var canvas = document.createElement("canvas");
+
+                        // var canvas = document.getElementById("canvas");
+                        var ctx = canvas.getContext("2d");
+
+                        // Actual resizing
+                        ctx.drawImage(img, 0, 0, 300, 300);
+
+                        // Show resized image in preview element
+                        var dataurl = canvas.toDataURL(imageFile.type);
+                        document.getElementById("preview").src = dataurl;
+                    }
+                    img.src = e.target.result;
+                }
+                reader.readAsDataURL(imageFile);
+            }
+        }); */
+        
+      
+     // var img = document.getElementById('uploaded-image');
+      //console.log(cells.alt);
+      
+      //const img = tf.fromPixels(cells);
+      //img = img.reshape(1,128,128,3)
+     // tf.loadModel ("{{ url_for('static', filename='https://slp-fall-2023.s3.us-west-1.amazonaws.com/try1/model/model/model.json') }}").then(function(model) {model.predict(img) });
+      
+      model = tf.loadLayersModel('https://slp-fall-2023.s3.us-west-1.amazonaws.com/try1/model/model/model.json')
+      document.write("check1")
+      let im = document.getElementById('uploaded-image');
+      const pred = model.predict(im).dataSync();
+        
+    
+        
+        </script>
+    
+
+</body>
+</html>
